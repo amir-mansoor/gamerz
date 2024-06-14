@@ -55,4 +55,23 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { registerUser, loginUser };
+// update user profile
+
+const updateProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.country = req.body.country || user.country;
+    user.bio = req.body.bio || user.bio;
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+  }
+
+  await user.save();
+  res.status(200).json({ msg: "Profile Updated" });
+});
+
+export { registerUser, loginUser, updateProfile };
