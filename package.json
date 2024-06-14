@@ -1,0 +1,17 @@
+{
+  "name": "gamerz",
+  "version": "1.0.0",
+  "description": "Building website for gamerz",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "server": "node --env-file .env --watch backend/server.js"
+  },
+  "author": "Amir Mansoor",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.1"
+  }
+}
