@@ -7,9 +7,11 @@ const userSchema = new mongoose.Schema(
     email: { type: String, unique: true },
     password: { type: String },
     bio: { type: String },
+    country: { type: String },
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     requests: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    location: { type: String },
+
+    isAdmin: { type: Boolean, default: false },
     social: {
       facebook: { type: String },
       twitter: { type: String },
