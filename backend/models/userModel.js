@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema(
     country: { type: String },
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     requests: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-
     isAdmin: { type: Boolean, default: false },
     social: {
       facebook: { type: String },

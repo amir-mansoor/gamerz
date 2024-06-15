@@ -81,6 +81,7 @@ const updateProfile = asyncHandler(async (req, res) => {
   });
 });
 
+// send friend request controller
 const sendFriendRequest = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id);
@@ -100,11 +101,11 @@ const sendFriendRequest = asyncHandler(async (req, res) => {
   res.status(200).json({ msg: "Request sent" });
 });
 
+// accept friend request controller
 const acceptFriendRequest = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id);
-  // user amir mansoor
-  // login sannan afsar
+
   if (!user) {
     res.status(400);
     throw new Error("User not found");
@@ -125,10 +126,46 @@ const acceptFriendRequest = asyncHandler(async (req, res) => {
   }
 });
 
+// add social links to profile
+const addSocialLinks = asyncHandler(async (req, res) => {
+  const { twitter, instagram, facebook } = req.body;
+  console.log(twitter, instagram, facebook);
+  req.user.social = { twitter, instagram, facebook };
+  await req.user.save();
+  res.json({ msg: "Links added to profile" });
+});
+
+// Get single user.
+const getSingleUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id).select("-password");
+  if (user) {
+    res.json(user);
+  }
+});
+
+//  ***********Admin controllers***********
+
+// Get all users for admin dashboard
+const getAllUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({}).select("-password -requests");
+  res.json(users);
+});
+
+// delete user
+const deleteUser = asyncHandler(async (req, res) => {
+  await User.findOneAndDelete({ _id: req.params.id });
+
+  res.json({ msg: "User deleted successfully." });
+});
+
 export {
   registerUser,
   loginUser,
   updateProfile,
   sendFriendRequest,
   acceptFriendRequest,
+  addSocialLinks,
+  getAllUsers,
+  getSingleUser,
+  deleteUser,
 };
