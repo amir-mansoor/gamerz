@@ -71,7 +71,49 @@ const updateProfile = asyncHandler(async (req, res) => {
   }
 
   await user.save();
-  res.status(200).json({ msg: "Profile Updated" });
+  res.json({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    bio: user.bio,
+    location: user.country,
+    social: user.social,
+  });
 });
 
-export { registerUser, loginUser, updateProfile };
+const sendFriendRequest = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (user) {
+    if (user.requests.includes(req.user._id)) {
+      res.status(400);
+      throw new Error("Request already send.");
+    }
+    user.requests.push(req.user._id);
+    await user.save();
+    res.status(200).json({ msg: "Request sent" });
+  }
+});
+
+const acceptFriendRequest = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (user.friends.includes(req.user._id)) {
+    res.status(400);
+    throw new Error("Already Friends");
+  } else {
+    user.friends.push(user._id);
+    req.user.friends.push(req.user._id);
+    await user.save();
+    await req.user.save();
+    res.status(200).json({ msg: "Request accepted" });
+  }
+});
+
+export {
+  registerUser,
+  loginUser,
+  updateProfile,
+  sendFriendRequest,
+  acceptFriendRequest,
+};

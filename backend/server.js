@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import userRoutes from "./routes/userRoutes.js";
 import { ErrorHandler, notFound } from "./middlewares/errorMiddleware.js";
 import cookieParser from "cookie-parser";
+import logger from "./middlewares/loggerMiddleware.js";
 dotenv.config();
 
 const app = express();
@@ -12,6 +13,7 @@ connectDB();
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(logger);
 
 app.get("/", (req, res) => {
   res.send("Api is running");
