@@ -103,7 +103,8 @@ const sendFriendRequest = asyncHandler(async (req, res) => {
 const acceptFriendRequest = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id);
-
+  // user amir mansoor
+  // login sannan afsar
   if (!user) {
     res.status(400);
     throw new Error("User not found");
@@ -112,8 +113,12 @@ const acceptFriendRequest = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Already Friends");
   } else {
-    user.friends.push(user._id);
-    req.user.friends.push(req.user._id);
+    user.friends.push(req.user._id);
+    req.user.friends.push(user._id);
+
+    req.user.requests = req.user.requests.filter(
+      (id) => id.toString() !== user._id.toString()
+    );
     await user.save();
     await req.user.save();
     res.status(200).json({ msg: "Request accepted" });
