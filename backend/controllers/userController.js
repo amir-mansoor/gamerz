@@ -84,20 +84,30 @@ const updateProfile = asyncHandler(async (req, res) => {
 const sendFriendRequest = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id);
-  if (user) {
-    if (user.requests.includes(req.user._id)) {
-      res.status(400);
-      throw new Error("Request already send.");
-    }
-    user.requests.push(req.user._id);
-    await user.save();
-    res.status(200).json({ msg: "Request sent" });
+
+  if (!user) {
+    res.status(400);
+    throw new Error("User not found");
   }
+
+  if (user.requests.includes(req.user._id)) {
+    res.status(400);
+    throw new Error("Request already send.");
+  }
+
+  user.requests.push(req.user._id);
+  await user.save();
+  res.status(200).json({ msg: "Request sent" });
 });
 
 const acceptFriendRequest = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id);
+
+  if (!user) {
+    res.status(400);
+    throw new Error("User not found");
+  }
   if (user.friends.includes(req.user._id)) {
     res.status(400);
     throw new Error("Already Friends");
