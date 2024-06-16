@@ -25,11 +25,20 @@ const deletePost = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const post = await Post.findById(id);
   if (post) {
-    await Post.deleteOne({ _id: post._id });
-    res.json({ msg: "Post deleted successfully" });
+    if (post.user.toString() !== req.user._id.toString()) {
+      res.status(401);
+      throw new Error("You cannot delete this post");
+    }
+    if (post) {
+      await Post.deleteOne({ _id: post._id });
+      res.json({ msg: "Post deleted successfully" });
+    } else {
+      res.status(404);
+      throw new Error("No post found with the given id");
+    }
   } else {
     res.status(404);
-    throw new Error("No post found with the given id");
+    throw new Error("No post found.");
   }
 });
 
@@ -37,14 +46,24 @@ const deletePost = asyncHandler(async (req, res) => {
 
 const updatePost = asyncHandler(async (req, res) => {
   const post = await Post.findById(req.params.id);
-  const { content } = req.body;
+
   if (post) {
-    post.content = content;
-    await post.save();
-    res.json({ msg: "post updated successfully" });
+    if (post.user.toString() !== req.user._id.toString()) {
+      res.status(401);
+      throw new Error("You cannot update this post");
+    }
+    const { content } = req.body;
+    if (post) {
+      post.content = content;
+      await post.save();
+      res.json({ msg: "post updated successfully" });
+    } else {
+      res.status(404);
+      throw new Error("Post not found");
+    }
   } else {
     res.status(404);
-    throw new Error("Post not found");
+    throw new Error("No post found");
   }
 });
 
