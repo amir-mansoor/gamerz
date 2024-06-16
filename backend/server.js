@@ -2,6 +2,7 @@ import express from "express";
 import connectDB from "./config/db.js";
 import dotenv from "dotenv";
 import userRoutes from "./routes/userRoutes.js";
+import feedBackRoutes from "./routes/feedbackRoutes.js";
 import { ErrorHandler, notFound } from "./middlewares/errorMiddleware.js";
 import cookieParser from "cookie-parser";
 import logger from "./middlewares/loggerMiddleware.js";
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/users", userRoutes);
+app.use("/api/feedbacks", feedBackRoutes);
 
 app.use(notFound);
 app.use(ErrorHandler);
