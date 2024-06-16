@@ -143,6 +143,14 @@ const getSingleUser = asyncHandler(async (req, res) => {
   }
 });
 
+// decline request
+const declineRequest = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  req.user.requests.filter((requestedId) => requestedId !== id);
+  await req.user.save();
+  res.json({ msg: "Request declined" });
+});
+
 //  ***********Admin controllers***********
 
 // Get all users for admin dashboard
@@ -168,4 +176,5 @@ export {
   getAllUsers,
   getSingleUser,
   deleteUser,
+  declineRequest,
 };
