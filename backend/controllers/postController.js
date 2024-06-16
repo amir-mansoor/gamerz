@@ -33,4 +33,19 @@ const deletePost = asyncHandler(async (req, res) => {
   }
 });
 
-export { createPost, getSinglePost, deletePost };
+// update post
+
+const updatePost = asyncHandler(async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  const { content } = req.body;
+  if (post) {
+    post.content = content;
+    await post.save();
+    res.json({ msg: "post updated successfully" });
+  } else {
+    res.status(404);
+    throw new Error("Post not found");
+  }
+});
+
+export { createPost, getSinglePost, deletePost, updatePost };
