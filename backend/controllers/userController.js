@@ -166,6 +166,11 @@ const deleteUser = asyncHandler(async (req, res) => {
   res.json({ msg: "User deleted successfully." });
 });
 
+const verifyUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  // need to add verify logic according to the criteria
+});
+
 export {
   registerUser,
   loginUser,

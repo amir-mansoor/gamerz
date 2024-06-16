@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema(
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     requests: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     isAdmin: { type: Boolean, default: false },
+    isVerified: { type: Boolean, default: false },
     social: {
       facebook: { type: String },
       twitter: { type: String },
