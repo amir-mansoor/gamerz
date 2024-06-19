@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
+import RegisterScreen from "./screens/RegisterScreen.jsx";
 import "./globals.css";
 import {
   createBrowserRouter,
@@ -8,11 +9,13 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
+import LoginScreen from "./screens/LoginScreen.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="/dashboard" element={<App />} />
+      <Route path="/register" element={<RegisterScreen />} />
+      <Route path="/login" element={<LoginScreen />} />
     </Route>
   )
 );
