@@ -67,4 +67,37 @@ const updatePost = asyncHandler(async (req, res) => {
   }
 });
 
-export { createPost, getSinglePost, deletePost, updatePost };
+// get my posts
+const getMyPosts = asyncHandler(async (req, res) => {
+  const posts = await Post.find({ user: req.user._id });
+  res.json(posts);
+});
+
+// Like and dislike post
+
+const likePost = asyncHandler(async (req, res) => {
+  const post = await Post.findById(req.params.id);
+
+  const alreadyLiked = post.likes.indexOf(req.user._id);
+
+  if (post) {
+    if (alreadyLiked === 0) {
+      post.likes.splice(req.user._id, 1);
+    } else {
+      post.likes.push(req.user._id);
+    }
+  }
+
+  await post.save();
+
+  res.json(post);
+});
+
+export {
+  createPost,
+  getSinglePost,
+  deletePost,
+  updatePost,
+  getMyPosts,
+  likePost,
+};
