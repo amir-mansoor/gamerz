@@ -10,6 +10,8 @@ import {
   Route,
 } from "react-router-dom";
 import LoginScreen from "./screens/LoginScreen.jsx";
+import { Provider } from "react-redux";
+import { store } from "./store.js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,8 +24,10 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router}>
-      <App />
-    </RouterProvider>
+    <Provider store={store}>
+      <RouterProvider router={router}>
+        <App />
+      </RouterProvider>
+    </Provider>
   </React.StrictMode>
 );

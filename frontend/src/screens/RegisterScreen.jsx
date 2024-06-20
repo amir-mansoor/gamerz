@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const RegisterScreen = () => {
   return (
-    <div className="w-screen h-screen bg-fixed bg-[url('./assets/bg-image.jpg')] backdrop-brightness-150 bg-cover bg-center">
+    <div className="w-screen h-screen bg-[url('./assets/bg-image.jpg')] backdrop-brightness-150 bg-cover bg-center">
       <div className="container flex flex-col py-2 w-full h-full">
         <div className="mt-10">
           <h1 className="text-white text-4xl">Create New Account</h1>
