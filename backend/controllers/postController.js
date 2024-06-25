@@ -93,6 +93,51 @@ const likePost = asyncHandler(async (req, res) => {
   res.json(post);
 });
 
+// comment on post
+const commentOnPost = asyncHandler(async (req, res) => {
+  const { text } = req.body;
+  const post = await Post.findById(req.params.id);
+
+  if (post) {
+    post.comments.push({ user: req.user._id, text });
+  } else {
+    res.status(404);
+    throw new Error("Post not found!");
+  }
+
+  await post.save();
+  res.json({ msg: "comment added" });
+});
+
+// Delete comment
+const deleteComment = asyncHandler(async (req, res) => {
+  const post = await Post.findById(req.params.postId);
+
+  if (post) {
+    const comment = post.comments.find(
+      (comm) => comm._id.toString() === req.params.commentId
+    );
+
+    // console.log(comment);
+
+    if (comment) {
+      if (comment.user.toString() === req.user._id.toString()) {
+        post.comments.splice(comment._id, 1);
+        await post.save();
+        res.json({ msg: "comment deleted" });
+      } else {
+        res.status(400);
+        throw new Error("You can't delete this comment");
+      }
+    } else {
+      res.status(404);
+      throw new Error("No comment found");
+    }
+  }
+
+  // res.json("hello");
+});
+
 export {
   createPost,
   getSinglePost,
@@ -100,4 +145,6 @@ export {
   updatePost,
   getMyPosts,
   likePost,
+  commentOnPost,
+  deleteComment,
 };

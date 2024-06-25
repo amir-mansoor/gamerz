@@ -1,5 +1,5 @@
 const logger = (req, res, next) => {
-  console.log(`Api ${req.hostname}:/${req.originalUrl}`);
+  console.log(`${req.method} ${req.hostname}:/${req.originalUrl}`);
   next();
 };
 

@@ -13,9 +13,9 @@ const userSchema = new mongoose.Schema(
     isAdmin: { type: Boolean, default: false },
     isVerified: { type: Boolean, default: false },
     social: {
-      facebook: { type: String },
-      twitter: { type: String },
-      instagram: { type: String },
+      facebook: { type: String, default: "https://facebook.com" },
+      twitter: { type: String, default: "https://twitter.com" },
+      instagram: { type: String, default: "https://instagram.com" },
     },
   },
   {

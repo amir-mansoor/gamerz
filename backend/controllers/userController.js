@@ -5,7 +5,6 @@ import generateToken from "../utils/generatejwt.js";
 // Create New Account user registration
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
-
   const userExist = await User.findOne({ email });
 
   if (userExist) {
@@ -166,9 +165,14 @@ const deleteUser = asyncHandler(async (req, res) => {
   res.json({ msg: "User deleted successfully." });
 });
 
+// verify user logic
 const verifyUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
-  // need to add verify logic according to the criteria
+
+  const accountCreation = user.createdAt.toString().substring(0, 10);
+
+  console.log(accountCreation);
+  res.json("hello");
 });
 
 export {
@@ -182,4 +186,5 @@ export {
   getSingleUser,
   deleteUser,
   declineRequest,
+  verifyUser,
 };

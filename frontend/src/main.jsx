@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import RegisterScreen from "./screens/RegisterScreen.jsx";
 import "./globals.css";
+import "./App.css";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -11,13 +12,21 @@ import {
 } from "react-router-dom";
 import LoginScreen from "./screens/LoginScreen.jsx";
 import { Provider } from "react-redux";
-import { store } from "./store.js";
+import store from "./store.js";
+import HomeScreen from "./screens/HomeScreen.jsx";
+import NotFound from "./components/NotFound.jsx";
+import AuthRoutes from "./components/AuthRoutes.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="/register" element={<RegisterScreen />} />
-      <Route path="/login" element={<LoginScreen />} />
+      <Route path="/" element={<HomeScreen />} />
+      <Route path="" element={<AuthRoutes />}>
+        <Route path="/register" element={<RegisterScreen />} />
+        <Route path="/login" element={<LoginScreen />} />
+      </Route>
+
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );

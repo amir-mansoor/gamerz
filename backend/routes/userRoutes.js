@@ -10,6 +10,7 @@ import {
   getSingleUser,
   deleteUser,
   declineRequest,
+  verifyUser,
 } from "../controllers/userController.js";
 import { admin, protect } from "../middlewares/authMiddleware.js";
 const router = Router();
@@ -22,7 +23,9 @@ router.route("/request/:id").put(protect, sendFriendRequest);
 router.route("/accept/:id").put(protect, acceptFriendRequest);
 router.route("/addSocialLinks").put(protect, addSocialLinks);
 router.route("/decline/:id").put(protect, declineRequest);
+
 // Admin Routes
 router.route("/getAllUsers").get(protect, admin, getAllUsers);
 router.route("/deleteUser/:id").delete(protect, admin, deleteUser);
+router.route("/verify/:id").put(protect, admin, verifyUser);
 export default router;

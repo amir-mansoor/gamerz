@@ -7,12 +7,20 @@ import feedBackRoutes from "./routes/feedbackRoutes.js";
 import { ErrorHandler, notFound } from "./middlewares/errorMiddleware.js";
 import cookieParser from "cookie-parser";
 import logger from "./middlewares/loggerMiddleware.js";
+import cors from "cors"
 dotenv.config();
 
 const app = express();
 // connect to database
 connectDB();
 
+const corsOptions = {
+    origin:true,
+    credentials:true,
+}
+
+
+app.use(cors(corsOptions))
 app.use(cookieParser());
 app.use(express.json());
 app.use(logger);
