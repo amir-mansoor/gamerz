@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginMutation } from "@/slices/userApiSlice";
 import { setCredentials } from "@/slices/authSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
@@ -9,14 +9,24 @@ import { useState } from "react";
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch(``);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [login, { isLoading }] = useLoginMutation();
 
   const handleForm = async (e) => {
     e.preventDefault();
+    if (email.trim() === "" || password.trim() === "") {
+      toast.error("All Fields Are Required.");
+      return;
+    }
     try {
-      // const res = await register({ name, email, password }).unwrap();
+      const res = await login({ email, password }).unwrap();
+
+      dispatch(setCredentials({ ...res }));
+      navigate("/explore");
     } catch (err) {
-      toast.error(err.error);
+      console.log(err);
+      toast.error(err.data.message || err.error);
     }
   };
   return (
@@ -51,6 +61,7 @@ const LoginScreen = () => {
             </div>
 
             <Button
+              disabled={isLoading}
               className="w-fit bg-transparent border"
               onClick={handleForm}
             >
