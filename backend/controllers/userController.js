@@ -28,6 +28,7 @@ const registerUser = asyncHandler(async (req, res) => {
       bio: user.bio,
       location: user.country,
       social: user.social,
+      isAdmin: user.isAdmin,
     });
   }
 });
@@ -47,6 +48,7 @@ const loginUser = asyncHandler(async (req, res) => {
       bio: user.bio,
       location: user.country,
       social: user.social,
+      isAdmin: user.isAdmin,
     });
   } else {
     res.status(400);
