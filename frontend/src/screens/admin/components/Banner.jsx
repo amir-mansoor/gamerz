@@ -5,7 +5,10 @@ const Banner = () => {
   return (
     <div className="mt-10 backdrop-brightness-150 py-5 px-4 rounded">
       <h1 className="text-4xl">Good Morning, {userInfo.name} 👋</h1>
-      <p className="mt-2">Here is what's happening with your project today:</p>
+      <p className="mt-2">
+        Here is what's happening in gam<span className="text-red-600">erz</span>{" "}
+        today:
+      </p>
     </div>
   );
 };

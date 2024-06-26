@@ -7,11 +7,11 @@ function App() {
   return (
     <div>
       <ToastContainer />
-      <main className="container h-[90vh] py-3">
+      <main>
         <Outlet />
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

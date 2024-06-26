@@ -3,8 +3,8 @@ import { User } from "lucide-react";
 import { SidebarClose } from "lucide-react";
 const Header = () => {
   return (
-    <div className="backdrop-brightness-150 py-2 px-2 rounded ">
-      <div className="flex justify-between items-center">
+    <div className="rounded sticky top-0">
+      <div className="w-full  py-3 flex items-center bg-[#102536] justify-between border-b z-30 border-slate-300">
         <h1 className="text-4xl font-bold">
           Gam<span className="text-red-600">erz</span>
         </h1>
