@@ -18,6 +18,7 @@ import NotFound from "./components/NotFound.jsx";
 import AuthRoutes from "./components/AuthRoutes.jsx";
 import AdminRoutes from "./components/AdminRoutes.jsx";
 import AdminDashBoard from "./screens/admin/AdminDashBoard.jsx";
+import ExploreScreen from "./screens/ExploreScreen.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
         <Route path="/login" element={<LoginScreen />} />
       </Route>
 
+      <Route path="/explore" element={<ExploreScreen />} />
       <Route path="/" element={<AdminRoutes />}>
         <Route path="/admin/dashboard" element={<AdminDashBoard />} />
       </Route>

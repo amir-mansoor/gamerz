@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { User, Info } from "lucide-react";
+import { User } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
