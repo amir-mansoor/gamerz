@@ -22,9 +22,12 @@ const Header = () => {
         <p className="mt-2 text-xl font-bold">All Over The World</p>
         <div className="mt-2">
           {userInfo ? (
-            <Button className="bg-transparent border font-bold">
-              Explore The World Of Gam<span className="text-red-600">erz</span>
-            </Button>
+            <Link to="/explore">
+              <Button className="bg-transparent border font-bold">
+                Explore The World Of Gam
+                <span className="text-red-600">erz</span>
+              </Button>
+            </Link>
           ) : (
             <div className=" space-x-2 ">
               <Link to="/register">

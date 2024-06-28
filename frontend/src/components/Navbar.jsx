@@ -60,7 +60,7 @@ const Navbar = () => {
               </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-[#102536] text-white mr-1">
-              <DropdownMenuLabel>Amir Mansoor</DropdownMenuLabel>
+              <DropdownMenuLabel>{userInfo?.name}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <Link to={`/profile/edit/${userInfo?._id}`}>Edit Profile</Link>
@@ -71,6 +71,11 @@ const Navbar = () => {
               <DropdownMenuItem>
                 <Link to="/admin/posts">Posts</Link>
               </DropdownMenuItem>
+              {userInfo.isAdmin && (
+                <DropdownMenuItem>
+                  <Link to="/admin/dashboard">Dashboard</Link>
+                </DropdownMenuItem>
+              )}
               <DropdownMenuSeparator />
 
               <DropdownMenuItem onClick={() => handleLogout()}>
