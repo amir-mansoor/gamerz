@@ -18,12 +18,12 @@ const ProfileCard = () => {
         <p className="text-gray-300">
           Full Stack Software Engineer specializing in the MERN stack
         </p>
-        <div class="mt-4 flex justify-center items-center space-x-4">
-          <p class=" border-r border-gray-300 pr-4">Friends 150</p>
-          <p class=" pl-4"> Requests 3</p>
+        <div className="mt-4 flex justify-center items-center space-x-4">
+          <p className=" border-r border-gray-300 pr-4">Friends 150</p>
+          <p className=" pl-4"> Requests 3</p>
         </div>
-        <div class="mt-4">
-          <Link to="/proflie" class="text-indigo-200 hover:text-indigo-400">
+        <div className="mt-4">
+          <Link to="/proflie" className="text-indigo-200 hover:text-indigo-400">
             My Profile
           </Link>
         </div>
