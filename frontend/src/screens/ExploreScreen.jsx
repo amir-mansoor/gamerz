@@ -12,7 +12,7 @@ const ExploreScreen = () => {
         </div>
 
         {/* Midbar */}
-        <div className="flex-[0.5] flex flex-col overflow-y-auto">
+        <div className="flex-[0.5] h-screen  overflow-y-scroll scroll-smooth snap-mandatory mb-2">
           <Midbar />
         </div>
 

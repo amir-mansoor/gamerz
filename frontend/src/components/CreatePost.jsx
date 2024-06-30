@@ -18,7 +18,7 @@ const CreatePost = () => {
         </Avatar>
         <form className="w-full">
           <input
-            className="rounded  outline-none p-2 bg-gray-600 text-white"
+            className="rounded w-full  outline-none p-2 bg-gray-600 text-white"
             type="text"
             placeholder="What's Happening?"
           />
